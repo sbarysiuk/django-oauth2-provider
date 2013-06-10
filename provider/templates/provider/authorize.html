@@ -5,13 +5,13 @@
         <p>{{ client.name }} would like to access your data with the following permissions:</p>
         <ul>
             {% for permission in oauth_data.scope|scopes %}
-                <li>
-                    {% if permission == "read" %}
-                    Read your data
-                    {% else %}
-                    Write your data
-                    {% endif %}
-                </li>
+              {% if permission == "read" %}
+                <li>Read your data</li>
+              {% elif permission == "write" %}
+                <li>Write your data</li>
+              {% elif permission == "read+write" %}
+                <li>Read and write your data</li>
+              {% endif %}
             {% endfor %}
         </ul>
         <form method="post" action="{% url "oauth2:authorize" %}">

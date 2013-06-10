@@ -66,7 +66,7 @@ class Grant(models.Model):
     code = models.CharField(max_length=255, default=long_token)
     expires = models.DateTimeField(default=get_code_expiry)
     redirect_uri = models.CharField(max_length=255, blank=True)
-    scope = models.IntegerField(default=0)
+    scope = models.IntegerField(default=constants.SCOPES[2][0])
 
     def __unicode__(self):
         return self.code

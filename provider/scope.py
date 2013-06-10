@@ -58,8 +58,10 @@ def check(wants, has):
     """
     if wants & has == 0:
         return False
+
     if wants & has < wants:
         return False
+
     return True
 
 
@@ -74,7 +76,7 @@ def to_names(scope):
     return [
         name
         for (name, value) in SCOPE_NAME_DICT.iteritems()
-        if check(value, scope)
+        if check(value, scope) and not name == 'read+write'
     ]
 
 # Keep it compatible

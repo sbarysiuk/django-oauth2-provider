@@ -285,7 +285,7 @@ class AccessTokenTest(BaseOAuth2TestCase):
             'client_id': self.get_client().client_id,
             'client_secret': self.get_client().client_secret,
             'code': code,
-            'scope': 'read write'})
+            'scope': 'read write read+write'})
 
         self.assertEqual(400, response.status_code)
         self.assertEqual('invalid_scope', json.loads(response.content)['error'])
@@ -423,7 +423,7 @@ class ScopeTest(TestCase):
         names = scope.names(constants.READ_WRITE)
         names.sort()
 
-        self.assertEqual('read read+write write', ' '.join(names))
+        self.assertEqual('read write', ' '.join(names))
 
     def test_get_scope_ints(self):
         self.assertEqual(constants.READ, scope.to_int('read'))
@@ -439,4 +439,4 @@ class ScopeTest(TestCase):
         names = scope.names(constants.READ_WRITE)
         names.sort()
 
-        self.assertEqual('read read+write write', ' '.join(names))
+        self.assertEqual('read write', ' '.join(names))
